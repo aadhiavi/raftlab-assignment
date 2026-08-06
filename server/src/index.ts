@@ -44,6 +44,12 @@ io.on('connection', (socket) => {
 
 // Start MongoDB and Server
 const startServer = async () => {
+  if (require.main === module) {
+    server.listen(PORT, () => {
+      console.log(`Server is running on port ${PORT}`);
+    });
+  }
+
   try {
     let mongoUri = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/food-delivery';
 
@@ -61,15 +67,8 @@ const startServer = async () => {
       ]);
       console.log('Seeded database with menu items.');
     }
-
-    if (require.main === module) {
-      server.listen(PORT, () => {
-        console.log(`Server is running on port ${PORT}`);
-      });
-    }
   } catch (error) {
-    console.error('Failed to start server:', error);
-    process.exit(1);
+    console.error('Failed to connect to MongoDB:', error);
   }
 };
 
