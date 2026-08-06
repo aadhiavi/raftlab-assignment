@@ -5,9 +5,10 @@ import { addToCart, updateQuantity, removeFromCart } from '../store/cartSlice';
 import type { RootState } from '../store/store';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
+import { API_BASE_URL } from '../config';
 
 const fetchMenu = async (): Promise<MenuItem[]> => {
-  const { data } = await axios.get('http://localhost:5000/api/menu');
+  const { data } = await axios.get(`${API_BASE_URL}/api/menu`);
   return data;
 };
 

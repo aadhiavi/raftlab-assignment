@@ -5,6 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
+import { API_BASE_URL } from '../config';
 import type { RootState } from '../store/store';
 import { clearCart, updateQuantity, removeFromCart } from '../store/cartSlice';
 
@@ -29,7 +30,7 @@ const Checkout = () => {
 
   const mutation = useMutation({
     mutationFn: (newOrder: any) => {
-      return axios.post('http://localhost:5000/api/orders', newOrder);
+      return axios.post(`${API_BASE_URL}/api/orders`, newOrder);
     },
     onSuccess: (response) => {
       dispatch(clearCart());

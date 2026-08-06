@@ -1,9 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
+import { API_BASE_URL } from '../config';
 import { useNavigate } from 'react-router-dom';
 
 const fetchOrders = async () => {
-  const { data } = await axios.get('http://localhost:5000/api/orders');
+  const { data } = await axios.get(`${API_BASE_URL}/api/orders`);
   return data;
 };
 

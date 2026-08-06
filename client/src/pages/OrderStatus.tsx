@@ -3,9 +3,10 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { io } from 'socket.io-client';
+import { API_BASE_URL } from '../config';
 
 const fetchOrder = async (id: string) => {
-  const { data } = await axios.get(`http://localhost:5000/api/orders/${id}`);
+  const { data } = await axios.get(`${API_BASE_URL}/api/orders/${id}`);
   return data;
 };
 
@@ -26,7 +27,7 @@ const OrderStatus = () => {
     if (!id) return;
     
     // Connect to Socket.IO for real-time updates
-    const socket = io('http://localhost:5000');
+    const socket = io(API_BASE_URL);
     
     socket.emit('joinOrder', id);
     
